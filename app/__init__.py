@@ -1,6 +1,9 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-from pyhive import presto
+from pyhive import hive
+from utils import hql_commander
+
+cursor = hive.connect(host='10.8.8.21', port=10000).cursor()
 
 app = Flask(__name__)
 api = Api(app)
@@ -18,7 +21,8 @@ class HqlCommander(Resource):
     def post(self):
         req_json = request.get_json(force=True)
         hql_line = req_json['sql']
-        return [{"hql_status": True}]
+        results = hql_commander(cursor, hql_line)
+        return [{"hive_results": results}]
 
 
 api.add_resource(Ping, '/')
