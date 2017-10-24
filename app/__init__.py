@@ -7,7 +7,7 @@ from pyhive import hive
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
-from utils import hql_commander
+from app.utils import hql_commander
 from config import *
 
 cursor = hive.connect(host=HIVEURI, port=HIVEURIPORT).cursor()
