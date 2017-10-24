@@ -7,7 +7,7 @@ from pyhive import hive
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
-from app.utils import hql_commander
+from .utils import *
 from config import *
 
 cursor = hive.connect(host=HIVEURI, port=HIVEURIPORT).cursor()
@@ -30,9 +30,25 @@ class HqlCommander(Resource):
         results = hql_commander(cursor, hql_line)
         return {"hive_results": results}
 
+class EventsCommander(Resource):
+
+    def get(self):
+        return {'info': 'You need to parse you arguments.'}
+
+    def post(self):
+        req_json = request.get_json(force=True)
+        request_hql_element = {
+            'appVersion': req_json['appVersion'],
+            'eventKey': req_json['eventKey'],
+            'day': 20171023
+        }
+        hql_query_line = hql_query_line_generator(request_hql_element)
+        results = hql_commander(cursor, hql_query_line)
+        return {"hive_results": results}
 
 api.add_resource(Ping, '/')
 api.add_resource(HqlCommander, '/hql')
+api.add_resource(EventsCommander, '/event')
 
 
 if __name__ == '__main__':
