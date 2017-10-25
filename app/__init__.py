@@ -15,6 +15,7 @@ cursor = hive.connect(host=HIVEURI, port=HIVEURIPORT).cursor()
 app = Flask(__name__)
 api = Api(app)
 
+
 class Ping(Resource):
     def get(self):
         return {'ping': 'pong'}
@@ -22,7 +23,10 @@ class Ping(Resource):
 
 class HqlCommander(Resource):
     def get(self):
-        return {'hql': 'example'}
+        return {
+            'hql': 'SELECT event_key as eventKey, d_app_version as appVersion FROM events.frontend_event_orc WHERE event_key = "whatKey" AND day = 20171024 LIMIT 3',
+            'comment': 'POST /hql query example',
+        }
 
     def post(self):
         req_json = request.get_json(force=True)
@@ -30,21 +34,28 @@ class HqlCommander(Resource):
         results = hql_commander(cursor, hql_line)
         return {"hive_results": results}
 
-class EventsCommander(Resource):
 
+class EventsCommander(Resource):
     def get(self):
-        return {'info': 'You need to parse you arguments.'}
+        return {
+            'appVersion': '4.1.0',
+            'eventKey': 'enterHome',
+            'userId': 'bacedecf23423144124214134',
+            'comment': 'POST /event example'
+        }
 
     def post(self):
         req_json = request.get_json(force=True)
         request_hql_element = {
             'appVersion': req_json['appVersion'],
             'eventKey': req_json['eventKey'],
-            'day': 20171023
+            'userId': req_json['userId'],
+            'day': query_day_is()
         }
         hql_query_line = hql_query_line_generator(request_hql_element)
         results = hql_commander(cursor, hql_query_line)
-        return {"hive_results": results}
+        return {"fieldsList": RETURN_FIELDS_LIST ,"results": results}
+
 
 api.add_resource(Ping, '/')
 api.add_resource(HqlCommander, '/hql')
