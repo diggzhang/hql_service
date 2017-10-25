@@ -6,7 +6,7 @@ HIVEURIPORT = 10015
 
 SERVER_ADDR = "0.0.0.0"
 SERVER_PORT = 9000
-ISDEBUG = True
+ISDEBUG = False
 
 RETURN_FIELDS_LIST = [
     "id", "event_key", "category",

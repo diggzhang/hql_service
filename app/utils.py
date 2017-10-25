@@ -12,11 +12,11 @@ def hql_query_line_generator(hql_elem):
     fields_list = ','.join(RETURN_FIELDS_LIST)
     query_template = '''SELECT {fields_list}
     FROM events.frontend_event_orc
-    WHERE event_key = "{ek}"
+    WHERE day = {day}
+    AND event_key = "{ek}"
     AND u_user = "{u_user}"
     AND d_app_version = "{appv}"
     AND os = "{os}"
-    AND day = {day}
     LIMIT 15'''.format(ek=hql_elem['eventKey'],
                         day=hql_elem['day'],
                         appv=hql_elem['appVersion'],
