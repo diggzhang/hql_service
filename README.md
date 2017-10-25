@@ -70,7 +70,8 @@ curl -X POST \
   -d '{
   "appVersion": "4.1.0",
   "eventKey": "clickVideoResume",
-  "userId": "58d91f0586fd470********0"
+  "userId": "58d91f0586fd4705f5dc58b0",
+  "os": "android"
 }'
 # output
 {
@@ -93,28 +94,9 @@ curl -X POST \
             "android",
             "864410030261255",
             "4.1.0",
-            "58d91f0586fd***********0"
-        ],
-        [
-            "59eeccd5c31b763e2d323b7d",
-            "clickVideoResume",
-            "video",
-            "app",
-            "android",
-            "864410030261255",
-            "4.1.0",
             "58d91f0586fd4705f5dc58b0"
         ],
-        [
-            "59eeccf3c31b7**********2",
-            "clickVideoResume",
-            "video",
-            "app",
-            "android",
-            "864410030261255",
-            "4.1.0",
-            "58d91f0586fd***********0"
-        ]
+        # ...... 15 items
     ]
 }
 

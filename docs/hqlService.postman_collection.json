@@ -1,0 +1,46 @@
+{
+	"id": "1584532e-b729-09b1-ea8b-3fed549dbdc7",
+	"name": "hqlService",
+	"description": "",
+	"order": [
+		"54fb80ba-0f4c-4654-7a71-d4c9e2c1a787"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1508904447050,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "54fb80ba-0f4c-4654-7a71-d4c9e2c1a787",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:9000/event",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "1584532e-b729-09b1-ea8b-3fed549dbdc7",
+			"data": [],
+			"dataMode": "raw",
+			"name": "http://localhost:9000/event",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1508904453771,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{ \n  \"appVersion\": \"4.1.0\", \n  \"eventKey\": \"clickVideoResume\",\n  \"userId\": \"58d91f0586fd4705f5dc58b0\",\n  \"os\": \"android\"\n}"
+		}
+	]
+}
