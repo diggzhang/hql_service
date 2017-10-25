@@ -22,7 +22,7 @@
 					"enabled": true
 				}
 			],
-			"url": "http://localhost:9000/event",
+			"url": "http://10.8.8.111:9000/event",
 			"queryParams": [],
 			"pathVariables": {},
 			"pathVariableData": [],
@@ -31,7 +31,7 @@
 			"collectionId": "1584532e-b729-09b1-ea8b-3fed549dbdc7",
 			"data": [],
 			"dataMode": "raw",
-			"name": "http://localhost:9000/event",
+			"name": "http://10.8.8.111:9000/event",
 			"description": "",
 			"descriptionFormat": "html",
 			"time": 1508904453771,
