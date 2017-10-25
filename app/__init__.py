@@ -50,6 +50,7 @@ class EventsCommander(Resource):
             'appVersion': req_json['appVersion'],
             'eventKey': req_json['eventKey'],
             'userId': req_json['userId'],
+            'os': req_json['os'],
             'day': query_day_is()
         }
         hql_query_line = hql_query_line_generator(request_hql_element)
