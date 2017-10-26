@@ -1,7 +1,22 @@
 import os
+import subprocess
 from setuptools import setup, find_packages
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+
+def get_git_sha():
+    try:
+        s = str(subprocess.check_output(['git', 'rev-parse', 'HEAD']))
+        return s.strip()
+    except:
+        return ""
+
+
+GIT_SHA = get_git_sha()
+print("-==-" * 15)
+print("Version: " + GIT_SHA)
+print("-==-" * 15)
 
 setup(
     name='hql_service',
@@ -19,6 +34,7 @@ setup(
         'thrift==0.10.0',
         'thrift-sasl==0.3.0',
     ],
+    url='https://github.com/diggzhang/hql_service',
     author='diggzhang',
     author_email='diggzhang@gmail.com',
 )
