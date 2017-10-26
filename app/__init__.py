@@ -56,8 +56,8 @@ class EventsCommander(Resource):
             'day': query_day_is()
         }
         hql_query_line = hql_query_line_generator(request_hql_element)
-        results = hql_commander(cursor, hql_query_line)
-        return {"fieldsList": RETURN_FIELDS_LIST ,"results": results}
+        query_results = hql_commander(cursor, hql_query_line)
+        return convert_content_to_json(query_results)
 
 
 api.add_resource(Ping, '/')
