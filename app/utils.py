@@ -1,4 +1,5 @@
-import datetime
+import datetime, json
+import pandas as pd
 from config import RETURN_FIELDS_LIST
 
 
@@ -32,3 +33,13 @@ def hql_query_line_generator(hql_elem):
 def query_day_is():
     yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
     return yesterday.strftime("%Y%m%d")
+
+
+def convert_content_to_json(pd_dataframe):
+    return json.dumps(
+        list(
+            json.loads(
+                pd.DataFrame(pd_dataframe, columns=RETURN_FIELDS_LIST).to_json(orient='index')
+            ).values()
+        )
+    )
