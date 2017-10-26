@@ -2,6 +2,7 @@ import os
 import sys
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from pyhive import hive
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,6 +12,7 @@ CONFIG_MODULE = os.environ.get('HQL_SERVIECE_CONFIG', 'config')
 from .utils import *
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 api = Api(app)
 app.config.from_object(CONFIG_MODULE)
 conf = app.config
