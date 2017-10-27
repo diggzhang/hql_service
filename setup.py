@@ -9,8 +9,8 @@ def get_git_sha():
     try:
         s = str(subprocess.check_output(['git', 'rev-parse', 'HEAD']))
         return s.strip()
-    except:
-        return ""
+    except EOFError:
+        raise EOFError
 
 
 GIT_SHA = get_git_sha()

@@ -1,4 +1,5 @@
-import datetime, json
+import json
+import datetime
 import pandas as pd
 from config import RETURN_FIELDS_LIST
 
@@ -13,17 +14,17 @@ def hql_query_line_generator(hql_elem):
     fields_list = ','.join(RETURN_FIELDS_LIST)
     query_template = '''SELECT {fields_list}
     FROM events.frontend_event_orc
-    WHERE day = {day}
+    WHERE day = 20171025
     AND event_key = "{ek}"
     AND u_user = "{u_user}"
     AND d_app_version = "{appv}"
     AND os = "{os}"
     LIMIT 15'''.format(ek=hql_elem['eventKey'],
-                        day=hql_elem['day'],
-                        appv=hql_elem['appVersion'],
-                        fields_list=fields_list,
-                        os=hql_elem['os'],
-                        u_user=hql_elem['userId'])
+                       day=hql_elem['day'],
+                       appv=hql_elem['appVersion'],
+                       fields_list=fields_list,
+                       os=hql_elem['os'],
+                       u_user=hql_elem['userId'])
     print("--==" * 12)
     print(query_template)
     print("--==" * 12)
@@ -36,10 +37,12 @@ def query_day_is():
 
 
 def convert_content_to_json(pd_dataframe):
+    assert isinstance(pd_dataframe, object)
     return json.dumps(
         list(
             json.loads(
-                pd.DataFrame(pd_dataframe, columns=RETURN_FIELDS_LIST).to_json(orient='index')
+                pd.DataFrame(pd_dataframe,
+                             columns=RETURN_FIELDS_LIST).to_json(orient='index')
             ).values()
         )
     )

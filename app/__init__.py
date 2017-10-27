@@ -4,12 +4,11 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS
 from pyhive import hive
-
+from .utils import *
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 CONFIG_MODULE = os.environ.get('HQL_SERVIECE_CONFIG', 'config')
 
-from .utils import *
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -18,7 +17,9 @@ app.config.from_object(CONFIG_MODULE)
 conf = app.config
 
 if conf.get('HIVEURI') and conf.get('HIVEURIPORT'):
-    cursor = hive.connect(host=conf.get('HIVEURI'), port=conf.get('HIVEURIPORT')).cursor()
+    cursor = hive.connect(host=conf.get('HIVEURI'),
+                          port=conf.get('HIVEURIPORT')).cursor()
+
 
 class Ping(Resource):
     def get(self):
@@ -68,4 +69,6 @@ api.add_resource(EventsCommander, '/event')
 
 
 if __name__ == '__main__':
-    app.run(host=conf.get('HIVEURI'), port=conf.get('HIVEURIPORT'), debug=conf.get('ISDEBUG'))
+    app.run(host=conf.get('HIVEURI'),
+            port=conf.get('HIVEURIPORT'),
+            debug=conf.get('ISDEBUG'))
