@@ -14,17 +14,14 @@ def hql_query_line_generator(hql_elem):
     fields_list = ','.join(RETURN_FIELDS_LIST)
     query_template = '''SELECT {fields_list}
     FROM events.frontend_event_orc
-    WHERE day = 20171025
+    WHERE day BETWEEN {start} and {end}
     AND event_key = "{ek}"
-    AND u_user = "{u_user}"
-    AND d_app_version = "{appv}"
     AND os = "{os}"
     LIMIT 15'''.format(ek=hql_elem['eventKey'],
-                       day=hql_elem['day'],
-                       appv=hql_elem['appVersion'],
+                       start=hql_elem['day']['start'],
+                       end=hql_elem['day']['end'],
                        fields_list=fields_list,
-                       os=hql_elem['os'],
-                       u_user=hql_elem['userId'])
+                       os=hql_elem['os'])
     print("--==" * 12)
     print(query_template)
     print("--==" * 12)
@@ -33,7 +30,12 @@ def hql_query_line_generator(hql_elem):
 
 def query_day_is():
     yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
-    return yesterday.strftime("%Y%m%d")
+    week_range = {
+        'yesterday': yesterday.strftime("%Y%m%d"),
+        'start': (datetime.datetime.now() - datetime.timedelta(days=7)).strftime("%Y%m%d"),
+        'end': yesterday.strftime("%Y%m%d"),
+    }
+    return week_range
 
 
 def convert_content_to_json(pd_dataframe):

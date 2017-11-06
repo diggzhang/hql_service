@@ -52,9 +52,7 @@ class EventsCommander(Resource):
     def post(self):
         req_json = request.get_json(force=True)
         request_hql_element = {
-            'appVersion': req_json['appVersion'],
             'eventKey': req_json['eventKey'],
-            'userId': req_json['userId'],
             'os': req_json['os'],
             'day': query_day_is()
         }
