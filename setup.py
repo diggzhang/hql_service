@@ -29,7 +29,7 @@ setup(
     install_requires=[
         'Flask==0.12.2',
         'Flask-RESTful==0.3.6',
-        'Flask-Cors==3.0.3',
+        'Flask-Cors==3.0.9',
         'PyHive==0.5.0',
         'requests==2.18.4',
         'thrift==0.10.0',
